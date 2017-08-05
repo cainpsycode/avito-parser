@@ -42,7 +42,7 @@ function notifyByEmail(freshCars:Array<CarOutput>) {
     let transporter = nodemailer.createTransport(nodemailerSettings.mailer);
     let html = '<ul>';
     freshCars.forEach(car => {
-        html += `<li><a href="https://avito.ru/${car.url}">${car.description} / ${car.url} / ${car.price}</a></li>`;
+        html += `<li><a href="https://avito.ru/${car.url}">${car.date} / ${car.description} / ${car.url} / ${car.price}</a></li>`;
     });
     html += '</ul>';
 

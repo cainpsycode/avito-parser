@@ -2,7 +2,8 @@ namespace Avito {
     export enum Params {
         Transmission = 185,
         Year = 188,
-        Mileage = 1375
+        Mileage = 1375,
+        EngineCapacity = 1374
     }
 
     export enum ParamValueTypes {

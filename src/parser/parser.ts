@@ -107,7 +107,11 @@ namespace Avito {
                         if (!image) {
                             image = $item.find('.photo-wrapper > img').attr('src');
                         }
+
+                        var date = $item.find('.date').text().match('\\d.*\\d');
+                        console.log(date);
                         cars.push({
+                            date: date ? date[0] : "?",
                             url: $item.find('.item-description-title-link').attr('href'),
                             photo: image,
                             description: description,
@@ -117,6 +121,7 @@ namespace Avito {
                     });
                     return cars;
                 });
+
                 cars.push.apply(cars, parsedCars);
                 if (this.exists('.js-pagination-next')) {
                     var href = UrlBuilder.getBaseUrl() + casper.getElementAttribute('.js-pagination-next', 'href');

@@ -2,6 +2,8 @@
 /// <reference path="./Transmissions.ts" />
 /// <reference path="./Params.ts" />
 /// <reference path="./Years.ts" />
+/// <reference path="./EngineCapacity.ts" />
+/// <reference path="./AdsOwner.ts" />
 
 namespace Avito {
     export class UrlBuilder {
@@ -15,12 +17,19 @@ namespace Avito {
                 params.push(new Param(Params.Transmission, ParamValueTypes.Selection, transmissions));
             }
             params.push(new Param(Params.Year, ParamValueTypes.Range, [Years.getYearId(car.years.min), Years.getYearId(car.years.max)]));
+            params.push(new Param(Params.EngineCapacity, ParamValueTypes.Range, [EngineCapacity.getId(car.engineCapacity.min), EngineCapacity.getId(car.engineCapacity.max)]));
+
+            var adsOwnerSpecified = '';
+            if (car.adsOwner) {
+                const owner = AdsOwner[car.adsOwner];
+                adsOwnerSpecified = '&user=' + owner;
+            }
 
             const paramsStrings = params.map(function (param:Param) {
                 return param.build();
             });
             const paramsGlued = paramsStrings.join('.');
-            return `${this.getBaseUrl()}/${city}/avtomobili/${car.name}/${carModel}?f=${paramsGlued}&pmin=${car.price.min}&pmax=${car.price.max}&user=1`;
+            return `${this.getBaseUrl()}/${city}/avtomobili/${car.name}/${carModel}?f=${paramsGlued}&pmin=${car.price.min}&pmax=${car.price.max}${adsOwnerSpecified}`;
         }
 
         public static getBaseUrl() {
