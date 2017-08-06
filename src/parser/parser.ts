@@ -107,6 +107,9 @@ namespace Avito {
                         if (!image) {
                             image = $item.find('.photo-wrapper > img').attr('src');
                         }
+                        if (image) {
+                            image = image.replace(/^\/\//g, 'http://')
+                        }
 
                         var date = $item.find('.date').text().match('\\d.*\\d');
                         console.log(date);
