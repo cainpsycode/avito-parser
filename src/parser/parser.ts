@@ -77,14 +77,13 @@ namespace Avito {
                 }
             }
         });
-        /*casper.each(carsOld, function (self, carOld) {
-            if (!cars.find(function (car) {
-                    return car.url === carOld.url;
-                })) {
+
+        casper.each(carsOld, function (self, carOld) {
+            if (!cars.find(car => car.url === carOld.url)) {
                 casper.echo(`deprecated! ${carOld.url}`);
                 carOld.deprecated = true;
             }
-        });*/
+        });
         fs.write(fileName, JSON.stringify(carsOld), 'w');
     }
 
