@@ -40,12 +40,14 @@ function exec() {
 
 function notifyByEmail(freshCars:Array<CarOutput>) {
     let transporter = nodemailer.createTransport(nodemailerSettings.mailer);
-    let html = '<ul>';
+    let html = '';
     freshCars.forEach(car => {
-        html += `<li><a href="https://avito.ru/${car.url}">${car.date} / ${car.description} / ${car.url} / ${car.price}</a></li>`;
+        html += 
+        `<div style="display:flex; align-items:center;"><a href="https://avito.ru/${car.url}"><img src="${car.photo}"></a>` +
+        `<span style="margin-left:10px"><a href="https://avito.ru/${car.url}">${car.date} <br> ${car.description} <br> ${car.price}</a>` +
+        `</span></div><br>`;
     });
-    html += '</ul>';
-
+    
     let mailOptions = {
         from: nodemailerSettings.mailOptions.from,
         to: nodemailerSettings.mailOptions.to,
